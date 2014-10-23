@@ -1,18 +1,18 @@
 <form ng-submit="saveParty()" class="form-inline party-form" role="form">
   <div class="form-group">
     <label class="sr-only" for="partyName">Name</label>
-    <input ng-model="party.name" type="text" class="form-control" id="partyName" placeholder="Name" autofocus>
+    <input ng-model="newParty.name" type="text" class="form-control" id="partyName" placeholder="Name" autofocus>
   </div>
 
   <div class="form-group">
     <label class="sr-only" for="songName">Song</label>
-    <input ng-model="party.song" type="text" class="form-control" id="songName" placeholder="Song">
+    <input ng-model="newParty.song" type="text" class="form-control" id="songName" placeholder="Song">
     </div>
   </div>
 
   <div class="form-group">
     <label class="sr-only" for="phoneNumber">Phone Number</label>
-    <input ng-model="party.phone" type="text" class="form-control" id="phoneNumber" placeholder="Phone Number">
+    <input ng-model="newParty.phone" type="text" class="form-control" id="phoneNumber" placeholder="Phone Number">
   </div>
 
   <button type="submit" class="btn btn-primary">Add applicant</button>
@@ -26,7 +26,7 @@
       <th>Actions</th>
     </tr>
   </thead>
-  <tr ng-repeat="party in parties">
+  <tr ng-repeat="party in parties | orderByPriority">
     <td><input type="checkbox"></td>
     <td>
       <div><strong>{{ party.name }} - {{ party.song }}</strong></div>
@@ -40,7 +40,7 @@
     </td>
     <td>
       <button type="submit" class="btn btn-success">Send SMS</button>
-      <button type="submit" class="btn btn-danger">Delete</button>
+      <button ng-click="parties.$remove(party.$id)" type="submit" class="btn btn-danger">Remove</button>
     </td>
   </tr>
 </table>
