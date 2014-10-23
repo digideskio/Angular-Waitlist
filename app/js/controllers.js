@@ -18,9 +18,15 @@ angular.module('myApp.controllers', [])
       $scope.newParty = {name:'',song:'', phone:''};
     };
 
-    $scope.sendTextMessage = function(phoneNumber){
+    $scope.sendTextMessage = function(party){
       var textMessageRef = new Firebase('https://kara-oke.firebaseio.com/textMessages')
       var textMessages = $firebase(textMessageRef);
-      textMessages.$add({phoneNumber: phoneNumber});
+      var newTextMessage = {
+        phoneNumber: party.phone,
+        name: party.name,
+        song: party.song
+
+      };
+      textMessages.$add(newTextMessage);
     }
   }]);
