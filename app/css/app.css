@@ -9,3 +9,7 @@ body {
 .starter-template h1 {
   font-size: 63px;
 }
+
+.party-form {
+  padding-bottom: 20px;
+}
