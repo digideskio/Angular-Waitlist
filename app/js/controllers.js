@@ -7,7 +7,7 @@ angular.module('myApp.controllers', [])
 
   }])
   .controller('WaitlistController',['$scope', '$firebase', function($scope,$firebase){
-    var partiesRef = new Firebase('https://kara-oke.firebaseio.com/')
+    var partiesRef = new Firebase('https://kara-oke.firebaseio.com/parties')
 
     $scope.parties = $firebase(partiesRef);
 
@@ -17,4 +17,10 @@ angular.module('myApp.controllers', [])
       $scope.parties.$add($scope.newParty);
       $scope.newParty = {name:'',song:'', phone:''};
     };
+
+    $scope.sendTextMessage = function(phoneNumber){
+      var textMessageRef = new Firebase('https://kara-oke.firebaseio.com/textMessages')
+      var textMessages = $firebase(textMessageRef);
+      textMessages.$add({phoneNumber: phoneNumber});
+    }
   }]);
