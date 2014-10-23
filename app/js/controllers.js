@@ -11,11 +11,11 @@ angular.module('myApp.controllers', [])
 
     $scope.parties = $firebase(partiesRef);
 
-    $scope.newParty = {name:'',song:'', phone:''};
+    $scope.newParty = {name:'',song:'', phone:'', done:false, notified: "No"};
 
     $scope.saveParty = function(){
       $scope.parties.$add($scope.newParty);
-      $scope.newParty = {name:'',song:'', phone:''};
+      $scope.newParty = {name:'',song:'', phone:'', done: false, notified: "No"};
     };
 
     $scope.sendTextMessage = function(party){
@@ -25,8 +25,9 @@ angular.module('myApp.controllers', [])
         phoneNumber: party.phone,
         name: party.name,
         song: party.song
-
       };
       textMessages.$add(newTextMessage);
+      party.notified = "Yes"
+      $scope.parties.$save(party.$id);
     }
   }]);

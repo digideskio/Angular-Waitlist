@@ -27,7 +27,7 @@
     </tr>
   </thead>
   <tr ng-repeat="party in parties | orderByPriority">
-    <td><input type="checkbox"></td>
+    <td><input ng-model="party.done" ng-change="parties.$save()" type="checkbox"></td>
     <td>
       <div><strong>{{ party.name }} - {{ party.song }}</strong></div>
       <div>{{ party.phone }}</div>
@@ -35,7 +35,7 @@
     </td>
     <td>
       <div>
-        <!-- TODO: Add party.notified -->
+        {{party.notified}}
       </div>
     </td>
     <td>
