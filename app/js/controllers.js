@@ -6,7 +6,7 @@ angular.module('myApp.controllers', [])
   .controller('LandingPageController',[function () {
 
   }])
-  .controller('WaitlistController',['$scope', '$firebase', function($scope,$firebase){
+  .controller('WaitlistController',['$scope', '$firebase', function ($scope,$firebase){
     var partiesRef = new Firebase('https://kara-oke.firebaseio.com/parties')
 
     $scope.parties = $firebase(partiesRef);
@@ -29,5 +29,17 @@ angular.module('myApp.controllers', [])
       textMessages.$add(newTextMessage);
       party.notified = "Yes"
       $scope.parties.$save(party.$id);
-    }
+    };
+  }])
+  .controller('AuthController', ['$scope', '$firebaseSimpleLogin', function ($scope, $firebaseSimpleLogin) {
+    var authRef = new Firebase("https://kara-oke.firebaseio.com/")
+    var auth = $firebaseSimpleLogin(authRef)
+
+    $scope.user = {email:'',password:''}
+
+    $scope.register = function() {
+      auth.$createUser($scope.user.email, $scope.user.password).then(function(data){
+        console.log(data);
+      });
+    };
   }]);
