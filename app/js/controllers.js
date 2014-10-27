@@ -31,19 +31,20 @@ angular.module('myApp.controllers', [])
       $scope.parties.$save(party.$id);
     };
   }])
-  .controller('AuthController', ['$scope', 'authService', function ($scope, authService) {
+  .controller('AuthController', ['$scope', 'authService', function($scope, authService) {
 
-    $scope.user = {email:'',password:''}
+    $scope.user = {email:'',password:''};
 
     $scope.register = function() {
       authService.register($scope.user);
     };
 
-    $scope.login = function () {
-      authService.login($scope.user)
+    $scope.login = function() {
+      authService.login($scope.user);
     };
 
-    $scope.logout = function  () {
+    $scope.logout = function() {
       authService.logout();
-    }
+    };
+
   }]);
