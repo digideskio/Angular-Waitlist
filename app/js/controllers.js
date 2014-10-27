@@ -12,7 +12,7 @@ angular.module('myApp.controllers', [])
     $scope.newParty = {name:'',song:'', phone:'', done:false, notified: "No"};
 
     $scope.saveParty = function(){
-      partyService.saveParty($scope.newParty)
+      partyService.saveParty($scope.newParty, $scope.currentUser.id)
       $scope.newParty = {name:'',song:'', phone:'', done: false, notified: "No"};
     };
 
