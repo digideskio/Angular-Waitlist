@@ -4,9 +4,14 @@
 
 angular.module('myApp.services', [])
   .value('FIREBASE_URL', 'https://kara-oke.firebaseio.com/')
-  .factory('partyService',function($firebase, FIREBASE_URL) {
-    var partiesRef = new Firebase(FIREBASE_URL + 'parties')
-    var parties = $firebase(partiesRef);
+  .factory('dataService', function($firebase, FIREBASE_URL) {
+    var dataRef = new Firebase(FIREBASE_URL);
+    var fireData = $firebase(dataRef);
+
+    return fireData;
+  })
+  .factory('partyService',function(dataService) {
+    var parties = dataService.$child('parties')
 
     var partyServiceObject = {
       parties: parties,
@@ -17,9 +22,8 @@ angular.module('myApp.services', [])
 
     return partyServiceObject;
   })
-  .factory('textMessageService', function($firebase, FIREBASE_URL, partyService) {
-    var textMessageRef = new Firebase(FIREBASE_URL + 'textMessages')
-    var textMessages = $firebase(textMessageRef);
+  .factory('textMessageService', function(dataService, partyService) {
+    var textMessages = dataService.$child('textMessages')
 
     var textMessageServiceObject = {
       sendTextMessage: function(party) {
