@@ -10,6 +10,7 @@ angular.module('myApp.services', [])
 
     return fireData;
   })
+
   .factory('partyService',function(dataService) {
     var users = dataService.$child('users');
 
@@ -24,6 +25,7 @@ angular.module('myApp.services', [])
 
     return partyServiceObject;
   })
+
   .factory('textMessageService', function(dataService, partyService) {
     var textMessages = dataService.$child('textMessages')
 
@@ -41,9 +43,11 @@ angular.module('myApp.services', [])
 
     return textMessageServiceObject;
   })
-  .factory('authService', function($firebaseSimpleLogin, $location, $rootScope, FIREBASE_URL) {
+
+  .factory('authService', function($firebaseSimpleLogin, $location, $rootScope, FIREBASE_URL, dataService) {
     var authRef = new Firebase(FIREBASE_URL);
     var auth = $firebaseSimpleLogin(authRef);
+    var emails = dataService.$child('emails')
 
     var authServiceObject = {
       register: function(user) {
@@ -55,6 +59,7 @@ angular.module('myApp.services', [])
       login: function(user) {
         auth.$login('password', user).then(function(data) {
           console.log(data);
+          emails.$add({email: user.email});
           $location.path('/waitlist');
         });
       },
