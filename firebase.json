@@ -1,0 +1,9 @@
+{
+  "firebase": "kara-oke",
+  "public": "app",
+  "ignore": [
+    "firebase.json",
+    "**/.*",
+    "**/node_modules/**"
+  ]
+}
