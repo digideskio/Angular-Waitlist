@@ -11,14 +11,14 @@ angular.module('myApp.services', [])
     return fireData;
   })
   .factory('partyService',function(dataService) {
-    var parties = dataService.$child('parties')
     var users = dataService.$child('users');
 
     var partyServiceObject = {
-      parties: parties,
       saveParty: function(party, userId) {
-        // parties.$add(party);
         users.$child(userId).$child('parties').$add(party);
+      },
+      getPartiesByUserId: function(userId) {
+        return users.$child(userId).$child('parties');
       }
     };
 
@@ -28,15 +28,14 @@ angular.module('myApp.services', [])
     var textMessages = dataService.$child('textMessages')
 
     var textMessageServiceObject = {
-      sendTextMessage: function(party) {
+      sendTextMessage: function(party, userId) {
         var newTextMessage = {
           phoneNumber: party.phone,
           name: party.name,
           song: party.song
         };
         textMessages.$add(newTextMessage);
-        party.notified = "Yes";
-        partyService.parties.$save(party.$id);
+        partyService.getPartiesByUserId(userId).$child(party.$id).$update({notified: 'Yes'})
       }
     };
 
@@ -62,6 +61,9 @@ angular.module('myApp.services', [])
       logout: function() {
         auth.$logout();
         $location.path('/');
+      },
+      getCurrentUser: function() {
+        return auth.$getCurrentUser();
       }
     };
 
