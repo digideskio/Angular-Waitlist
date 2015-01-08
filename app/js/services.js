@@ -32,7 +32,7 @@ angular.module('myApp.services', [])
     var textMessageServiceObject = {
       sendTextMessage: function(party, userId) {
         var newTextMessage = {
-          phoneNumber: party.phone,
+          phoneNumber: '1' + party.phone,
           name: party.name,
           song: party.song
         };

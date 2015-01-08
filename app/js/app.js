@@ -8,6 +8,7 @@ angular.module('myApp', [
   'myApp.services',
   'myApp.directives',
   'myApp.controllers',
+  'ui.utils',
   'firebase'
 ]).
 config(['$routeProvider', function($routeProvider) {
