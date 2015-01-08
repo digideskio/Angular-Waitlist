@@ -8,6 +8,14 @@ angular.module('myApp.services', [])
     var dataRef = new Firebase(FIREBASE_URL);
     var fireData = $firebase(dataRef);
 
+    // closes navbar on click
+    // Doubt that this is a good place for this...
+    // Please advise
+    $('.nav a').on('click', function(){
+      $(".btn-navbar").click(); //bootstrap 2.x
+      $(".navbar-toggle").click() //bootstrap 3.x by Richard
+    });
+
     return fireData;
   })
 
