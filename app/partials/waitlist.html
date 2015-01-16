@@ -6,7 +6,7 @@
 
   <div class="form-group">
     <label class="sr-only" for="songName">Song</label>
-    <input ng-model="newParty.song" type="text" class="form-control" id="songName" placeholder="Song">
+    <input ng-model="newParty.song" type="text" class="form-control" id="songName" placeholder="Message">
     </div>
   </div>
 
@@ -29,8 +29,8 @@
   <tr ng-repeat="party in parties | orderByPriority">
     <td><input ng-model="party.done" ng-change="parties.$save()" type="checkbox"></td>
     <td>
-      <div><strong>{{ party.name }} - {{ party.song }}</strong></div>
-      <div>{{ party.phone }}</div>
+      <div><strong>{{ party.name }}</strong> - {{ party.phone }}</div>
+      <div>{{ party.song }}</div>
       <!-- <div> TODO: Add date created </div> -->
     </td>
     <td>
