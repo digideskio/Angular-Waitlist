@@ -10,7 +10,7 @@ angular.module('myApp', [
   'ui.utils',
   'firebase'
 ])
-  .config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
+  .config(['$routeProvider', function($routeProvider) {
     $routeProvider.when('/', {
       templateUrl: 'partials/landing_page.html',
       controller: 'LandingPageController'
@@ -29,5 +29,4 @@ angular.module('myApp', [
     })
 
     $routeProvider.otherwise({redirectTo: '/'});
-    $locationProvider.html5Mode(true);
 }]);
